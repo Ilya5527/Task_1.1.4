@@ -19,6 +19,8 @@ import java.util.Properties;
 public class Util {
     // реализуйте настройку соеденения с БД
 
+    private static Util INSTANCE;
+
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         String hostName = "localhost";
         String dbName = "my_db";
@@ -40,6 +42,17 @@ public class Util {
     }
 
     // Подключение к БД с помощью Hibernate
+
+    private Util() {
+
+    }
+
+    public static Util getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Util();
+        }
+        return INSTANCE;
+    }
 
     public static SessionFactory getSessionFactory() {
         String hostName = "localhost";
